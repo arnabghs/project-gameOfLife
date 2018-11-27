@@ -1,6 +1,6 @@
 const assert = require('assert').deepEqual;
 
-const {repeatCharacter} = require('../src/util.js');
+const {repeatCharacter,makeHorizontalBorder} = require('../src/util.js');
 
 describe ("Test for lib",function(){
   describe("test for repeatCharacter",function(){
@@ -11,5 +11,13 @@ describe ("Test for lib",function(){
       assert(repeatCharacter("*",5,""),"*****");
       assert(repeatCharacter("a",5,"\n"),"a\na\na\na\na");
     });
-  })
-})
+  });
+  describe("test for makeHorizontalBorder",function(){
+    it('with 0 width should only return the hardcoded +',function(){
+      assert(makeHorizontalBorder(0),"+");
+    });
+    it('with n width should return the unit string n times connected as a string',function(){
+      assert(makeHorizontalBorder(5),"+---+---+---+---+---+");
+    });
+  });
+});
