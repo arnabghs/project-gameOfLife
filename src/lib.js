@@ -8,4 +8,11 @@ const createObject = function(side){
   return sampleObject;
 }
 
-module.exports = { createObject }
+const produceAlive = function(object,array){
+  for(let element of array){
+    object[element] = '*';
+  }
+  return object;
+}
+
+module.exports = { createObject,produceAlive }
