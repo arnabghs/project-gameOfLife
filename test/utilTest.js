@@ -2,7 +2,7 @@ const assert = require('assert').deepEqual;
 
 const {repeatCharacter,makeHorizontalBorder} = require('../src/util.js');
 
-describe ("Test for lib",function(){
+describe ("Test for util",function(){
   describe("test for repeatCharacter",function(){
     it('with 0 width should return empty string',function(){
       assert(repeatCharacter("",0,""),"");
