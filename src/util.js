@@ -44,6 +44,13 @@ const getNeighboursLastColumn = function(side,position){
   return filterNeighbours(side,neighbours);
 }
 
+const getNeighboursMiddleColumn = function(side,position){
+  let p = position, s = side;
+  let neighbours = new Array(0).concat(p-s-1,p-s,p-s+1,p-1,p+1,p+s-1,p+s,p+s+1);
+  return filterNeighbours(side,neighbours);
+}
+
+
 module.exports = {
   repeatCharacter,
   makeHorizontalBorder,
@@ -52,4 +59,5 @@ module.exports = {
   selectAlive,
   filterNeighbours,
   getNeighboursFirstColumn,
-  getNeighboursLastColumn}
+  getNeighboursLastColumn,
+  getNeighboursMiddleColumn }
