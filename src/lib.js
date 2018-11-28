@@ -39,7 +39,14 @@ const getAllNeighbours = function(side,position){
   return getNeighboursMiddleColumn(side,position);
 }
 
+
+const getLiveNeighbours = function(aliveArray,position,lengthOfSide){
+  let allNeighbourArray = getAllNeighbours(lengthOfSide,position);
+  return allNeighbourArray.filter(x => aliveArray.includes(x));
+}
+
 module.exports = { 
   produceAlive,
   outlineGenerator,
-  getAllNeighbours }
+  getAllNeighbours,
+  getLiveNeighbours}
