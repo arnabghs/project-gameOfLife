@@ -1,5 +1,6 @@
 const { 
   repeatCharacter,
+  createObject,
   makeHorizontalBorder,
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
@@ -52,9 +53,16 @@ const produceNextGenAliveCells = function(side,object,aliveArray){
   return aliveCells.concat(deadCells.filter(x => aliveNeighbourLength(x) == 3));
 }
 
+const logSampleSpace = function(side,aliveArray){
+  let emptyObject = createObject(side);
+  let presentObject = produceAlive(emptyObject,aliveArray);
+  console.log(outlineGenerator(side,presentObject));
+}
+
 module.exports = { 
   produceAlive,
   outlineGenerator,
   getAllNeighbours,
   getLiveNeighboursLength,
-  produceNextGenAliveCells }
+  produceNextGenAliveCells,
+  logSampleSpace }
