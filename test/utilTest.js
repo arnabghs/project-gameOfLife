@@ -44,7 +44,7 @@ describe ("Test for util",function(){
     });
   });
   describe("test for getNeighboursFirstColumn",function(){
-   it('for side 0 should return empty array',function(){
+    it('for side 0 should return empty array',function(){
       assert(getNeighboursFirstColumn(0,1),[]);
     });
     it('for different size an position array length will depend on the position',function(){
@@ -53,7 +53,7 @@ describe ("Test for util",function(){
     }); 
   });
   describe("test for getNeighboursLastColumn",function(){
-   it('for side 0 should return empty array',function(){
+    it('for side 0 should return empty array',function(){
       assert(getNeighboursLastColumn(0,1),[]);
     });
     it('for different size an position array length will depend on the position',function(){
@@ -62,7 +62,7 @@ describe ("Test for util",function(){
     }); 
   });
   describe("test for getNeighboursMiddleColumn",function(){
-   it('for side 0 should return empty array',function(){
+    it('for side 0 should return empty array',function(){
       assert(getNeighboursMiddleColumn(0,1),[]);
     });
     it('for different sizes array length will depend on the position',function(){

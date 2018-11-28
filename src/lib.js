@@ -40,13 +40,21 @@ const getAllNeighbours = function(side,position){
 }
 
 
-const getLiveNeighbours = function(aliveArray,lengthOfSide,position){
+const getLiveNeighboursLength = function(aliveArray,lengthOfSide,position){
   let allNeighbourArray = getAllNeighbours(lengthOfSide,position);
-  return allNeighbourArray.filter(x => aliveArray.includes(x));
+  return allNeighbourArray.filter(x => aliveArray.includes(x)).length;
+}
+
+const produceNextGenAliveCells = function(side,object,aliveArray){
+  let deadCells = Object.keys(object).map(x => +x).filter(x => !aliveArray.includes(x));
+  const aliveNeighbourLength = getLiveNeighboursLength.bind(null,aliveArray,side);
+  let aliveCells = aliveArray.filter(x => aliveNeighbourLength(x)==2 || aliveNeighbourLength(x)==3);
+  return aliveCells.concat(deadCells.filter(x => aliveNeighbourLength(x) == 3));
 }
 
 module.exports = { 
   produceAlive,
   outlineGenerator,
   getAllNeighbours,
-  getLiveNeighbours}
+  getLiveNeighboursLength,
+  produceNextGenAliveCells }
