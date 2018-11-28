@@ -1,6 +1,8 @@
 const assert = require('assert').deepEqual;
 
-const {createObject,produceAlive} = require('../src/lib.js');
+const {
+  createObject,
+  produceAlive} = require('../src/lib.js');
 
 describe ("Test for lib",function(){
   describe("test for createObject",function(){

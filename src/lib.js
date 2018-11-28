@@ -1,4 +1,7 @@
-const { repeatCharacter,makeHorizontalBorder } = require('./util.js');
+const { 
+  repeatCharacter,
+  makeHorizontalBorder } = require('./util.js');
+
 
 const createObject = function(side){
   let sampleObject = {};
@@ -15,4 +18,27 @@ const produceAlive = function(object,array){
   return object;
 }
 
-module.exports = { createObject,produceAlive }
+const outlineGenerator = function(side,object){
+  let outline = makeHorizontalBorder(side)+"\n";
+  let height = 0;
+  let startingIndex = 1;
+  let lastIndex = side;
+  while (height < side){
+    let line = '';
+    for(let index=startingIndex; index<=lastIndex; index++){
+      line += '| ' + object[index] + ' ';
+    };
+    line = line + '|' + '\n';
+    outline += line;
+    height++;
+    startingIndex += side;
+    lastIndex += side;
+  }
+  outline += makeHorizontalBorder(side);
+  return outline;
+}
+
+module.exports = { 
+  createObject,
+  produceAlive,
+  outlineGenerator }
