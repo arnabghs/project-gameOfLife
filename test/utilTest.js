@@ -4,7 +4,8 @@ const {
   repeatCharacter,
   makeHorizontalBorder,
   createObject,
-  filterNeighbours} = require('../src/util.js');
+  filterNeighbours,
+  getNeighboursfirstColumn} = require('../src/util.js');
 
 describe ("Test for util",function(){
   describe("test for repeatCharacter",function(){
@@ -39,5 +40,14 @@ describe ("Test for util",function(){
     it('for one or multielements array should return array of same or less length',function(){
       assert(filterNeighbours(3,[2,-1,5,6,0]),[2,5,6]);
     });
+  });
+  describe("test for getNeighboursfirstColumn",function(){
+   it('for side 0 should return empty array',function(){
+      assert(getNeighboursfirstColumn(0,1),[]);
+    });
+    it('for different size an position array length will depend on the position',function(){
+      assert(getNeighboursfirstColumn(4,1),[2,5,6]);
+      assert(getNeighboursfirstColumn(4,9),[5,6,10,13,14]);
+    }); 
   });
 });
