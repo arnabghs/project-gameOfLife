@@ -16,17 +16,6 @@ const createObject = function(side){
   return sampleObject;
 }
 
-
-const selectSide = function(){
-  let side = readline('Enter side of square: ');
-  return side;
-}
-
-const selectAlive = function(){
-  let moves = readline('Enter the position of live cells(use , as seperator): ');
-  return moves.split(',');
-};
-
 const filterNeighbours = function(side,inputArray){
   totalArray =  Object.keys(createObject(side)).map(x => +x)
   return inputArray.filter(x => totalArray.includes(x));
@@ -55,8 +44,6 @@ module.exports = {
   repeatCharacter,
   makeHorizontalBorder,
   createObject,
-  selectSide, 
-  selectAlive,
   filterNeighbours,
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
