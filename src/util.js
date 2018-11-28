@@ -27,9 +27,15 @@ const selectAlive = function(){
   return moves.split(',');
 };
 
+const filterNeighbours = function(side,inputArray){
+  totalArray =  Object.keys(createObject(side)).map(x => +x)
+  return inputArray.filter(x => totalArray.includes(x));
+}
+
 module.exports = {
   repeatCharacter,
   makeHorizontalBorder,
   createObject,
   selectSide, 
-  selectAlive }
+  selectAlive,
+  filterNeighbours}

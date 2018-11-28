@@ -3,7 +3,8 @@ const assert = require('assert').deepEqual;
 const {
   repeatCharacter,
   makeHorizontalBorder,
-  createObject} = require('../src/util.js');
+  createObject,
+  filterNeighbours} = require('../src/util.js');
 
 describe ("Test for util",function(){
   describe("test for repeatCharacter",function(){
@@ -29,6 +30,14 @@ describe ("Test for util",function(){
     });
     it('for non-zero input should return an object of length equal to input\'s square',function(){
       assert(createObject(2),{1:' ',2:' ',3:' ',4:' '});
+    });
+  });
+  describe("test for filterNeighbours",function(){
+    it('for empty array should return empty array',function(){
+      assert(filterNeighbours(2,[]),[]);
+    });
+    it('for one or multielements array should return array of same or less length',function(){
+      assert(filterNeighbours(3,[2,-1,5,6,0]),[2,5,6]);
     });
   });
 });
