@@ -32,7 +32,7 @@ const filterNeighbours = function(side,inputArray){
   return inputArray.filter(x => totalArray.includes(x));
 }
 
-const getNeighboursfirstColumn = function(side,position){
+const getNeighboursFirstColumn = function(side,position){
   let p = position, s = side;
   let neighbours = new Array(0).concat(p-s,p-s+1,p+1,p+s,p+s+1);
   return filterNeighbours(side,neighbours);
@@ -51,5 +51,5 @@ module.exports = {
   selectSide, 
   selectAlive,
   filterNeighbours,
-  getNeighboursfirstColumn,
+  getNeighboursFirstColumn,
   getNeighboursLastColumn}

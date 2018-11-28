@@ -5,7 +5,7 @@ const {
   makeHorizontalBorder,
   createObject,
   filterNeighbours,
-  getNeighboursfirstColumn,
+  getNeighboursFirstColumn,
   getNeighboursLastColumn} = require('../src/util.js');
 
 describe ("Test for util",function(){
@@ -42,13 +42,13 @@ describe ("Test for util",function(){
       assert(filterNeighbours(3,[2,-1,5,6,0]),[2,5,6]);
     });
   });
-  describe("test for getNeighboursfirstColumn",function(){
+  describe("test for getNeighboursFirstColumn",function(){
    it('for side 0 should return empty array',function(){
-      assert(getNeighboursfirstColumn(0,1),[]);
+      assert(getNeighboursFirstColumn(0,1),[]);
     });
     it('for different size an position array length will depend on the position',function(){
-      assert(getNeighboursfirstColumn(4,1),[2,5,6]);
-      assert(getNeighboursfirstColumn(4,9),[5,6,10,13,14]);
+      assert(getNeighboursFirstColumn(4,1),[2,5,6]);
+      assert(getNeighboursFirstColumn(4,9),[5,6,10,13,14]);
     }); 
   });
   describe("test for getNeighboursLastColumn",function(){
