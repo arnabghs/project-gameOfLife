@@ -1,9 +1,9 @@
 const { 
-  createObject,
   produceAlive,
   outlineGenerator } = require('./src/lib.js');
 
 const {
+  createObject,
   selectSide, 
   selectAlive } = require('./src/util.js');
 

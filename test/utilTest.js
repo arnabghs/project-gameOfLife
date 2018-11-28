@@ -1,6 +1,9 @@
 const assert = require('assert').deepEqual;
 
-const {repeatCharacter,makeHorizontalBorder} = require('../src/util.js');
+const {
+  repeatCharacter,
+  makeHorizontalBorder,
+  createObject} = require('../src/util.js');
 
 describe ("Test for util",function(){
   describe("test for repeatCharacter",function(){
@@ -18,6 +21,14 @@ describe ("Test for util",function(){
     });
     it('with n width should return the unit string n times connected as a string',function(){
       assert(makeHorizontalBorder(5),"+---+---+---+---+---+");
+    });
+  });
+  describe("test for createObject",function(){
+    it('should return empty object for input 0',function(){
+      assert(createObject(0),{});
+    });
+    it('for non-zero input should return an object of length equal to input\'s square',function(){
+      assert(createObject(2),{1:' ',2:' ',3:' ',4:' '});
     });
   });
 });
