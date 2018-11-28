@@ -34,13 +34,13 @@ describe ("Test for lib",function(){
   });
   describe("test for getLiveNeighbours",function(){
    it('for empty alive array should return empty array',function(){
-      assert(getLiveNeighbours([],1,3),[]);
+      assert(getLiveNeighbours([],3,1),[]);
     });
     it('for different sizes of alive array, length will be less or equal',function(){
-      assert(getLiveNeighbours([1,2,3,4],1,3),[2,4]);
-      assert(getLiveNeighbours([1,2,3],4,3),[1,2]);
-      assert(getLiveNeighbours([3,4,5,6],7,4),[3,4,6]);
-      assert(getLiveNeighbours([4,8,12],16,4),[12]);
+      assert(getLiveNeighbours([1,2,3,4],3,1),[2,4]);
+      assert(getLiveNeighbours([1,2,3],3,4),[1,2]);
+      assert(getLiveNeighbours([3,4,5,6],4,7),[3,4,6]);
+      assert(getLiveNeighbours([4,8,12],4,16),[12]);
     });
   });
 });

@@ -40,7 +40,7 @@ const getAllNeighbours = function(side,position){
 }
 
 
-const getLiveNeighbours = function(aliveArray,position,lengthOfSide){
+const getLiveNeighbours = function(aliveArray,lengthOfSide,position){
   let allNeighbourArray = getAllNeighbours(lengthOfSide,position);
   return allNeighbourArray.filter(x => aliveArray.includes(x));
 }
