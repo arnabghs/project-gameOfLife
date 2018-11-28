@@ -1,6 +1,9 @@
 const { 
   repeatCharacter,
-  makeHorizontalBorder } = require('./util.js');
+  makeHorizontalBorder,
+  getNeighboursFirstColumn,
+  getNeighboursLastColumn,
+  getNeighboursMiddleColumn } = require('./util.js');
 
 
 const produceAlive = function(object,array){
@@ -30,6 +33,13 @@ const outlineGenerator = function(side,object){
   return outline;
 }
 
+const getAllNeighbours = function(side,position){
+  if((position-1)%side == 0) return getNeighboursFirstColumn(side,position);
+  if(position % side == 0) return getNeighboursLastColumn(side,position);
+  return getNeighboursMiddleColumn(side,position);
+}
+
 module.exports = { 
   produceAlive,
-  outlineGenerator }
+  outlineGenerator,
+  getAllNeighbours }

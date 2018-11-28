@@ -65,7 +65,7 @@ describe ("Test for util",function(){
    it('for side 0 should return empty array',function(){
       assert(getNeighboursMiddleColumn(0,1),[]);
     });
-    it('for different size an position array length will depend on the position',function(){
+    it('for different sizes array length will depend on the position',function(){
       assert(getNeighboursMiddleColumn(4,6),[1,2,3,5,7,9,10,11]);
       assert(getNeighboursMiddleColumn(4,11),[6,7,8,10,12,14,15,16]);
     }); 
