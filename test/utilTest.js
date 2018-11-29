@@ -7,7 +7,8 @@ const {
   filterNeighbours,
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
-  getNeighboursMiddleColumn} = require('../src/util.js');
+  getNeighboursMiddleColumn,
+  convertCoordinateToValue } = require('../src/util.js');
 
 describe ("Test for util",function(){
   describe("test for repeatCharacter",function(){
@@ -69,5 +70,16 @@ describe ("Test for util",function(){
       assert(getNeighboursMiddleColumn(4,6),[1,2,3,5,7,9,10,11]);
       assert(getNeighboursMiddleColumn(4,11),[6,7,8,10,12,14,15,16]);
     }); 
+  });
+  describe('test for convertCoordinateToValue',function(){
+    it('for empty input array should return empty array',function(){
+      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[3,3]}),{side:4,livePositionValue:[]});
+    });
+    it('for bounds 0,0 should return side length 1',function(){
+      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[0,0]}),{side:1,livePositionValue:[]});
+    });
+    it('for non-empty array should preserve the length of array',function(){
+      assert(convertCoordinateToValue([[0,1],[1,1]],{topLeft:[0,0],bottomRight:[2,2]}),{side:3,livePositionValue:[2,5]});
+    });
   });
 });

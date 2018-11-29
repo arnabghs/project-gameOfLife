@@ -39,6 +39,11 @@ const getNeighboursMiddleColumn = function(side,position){
   return filterNeighbours(side,neighbours);
 }
 
+const convertCoordinateToValue = function(inputArray,bounds){
+  let side = bounds.bottomRight[1]-bounds.topLeft[1]+1;
+  let inputArrayOfValue = inputArray.map(x => x[0]*side+x[1]+1);
+  return {side: side, livePositionValue: inputArrayOfValue}
+}
 
 module.exports = {
   repeatCharacter,
@@ -47,4 +52,5 @@ module.exports = {
   filterNeighbours,
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
-  getNeighboursMiddleColumn }
+  getNeighboursMiddleColumn,
+  convertCoordinateToValue }
