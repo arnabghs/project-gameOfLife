@@ -1,17 +1,23 @@
 const { produceNextGenAliveCells, logSampleSpace} = require('./src/lib.js');
-const { createObject} = require('./src/util.js');
+const { createObject,convertCoordinateToValue } = require('./src/util.js');
 
-let lengthOfSide = +process.argv[2];
-let aliveArray = process.argv[3].split(',').map(x => +x);
+let aliveArray= process.argv[2].split('_').map(x=> x.split(',')).map(x => x.map(y => +y));
+let boundsCoordinate = process.argv[3].split('_').map(x=> x.split(',')).map(x => x.map(y => +y));
+
+let bounds = {};
+bounds['topLeft'] = boundsCoordinate[0];
+bounds['bottomRight'] = boundsCoordinate[1];
+
 
 const main = function(){
+  let {side, livePositionValue } = convertCoordinateToValue(aliveArray,bounds);
   console.log("\nInitial State\n");
-  logSampleSpace(lengthOfSide,aliveArray);
+  logSampleSpace(side, livePositionValue);
 
-  let nextGenAliveCells = produceNextGenAliveCells(lengthOfSide,createObject(lengthOfSide),aliveArray);
+  let nextGenAliveCells = produceNextGenAliveCells(side,createObject(side),livePositionValue);
 
   console.log("\nAfter first iteration\n");
-  logSampleSpace(lengthOfSide,nextGenAliveCells);
+  logSampleSpace(side,nextGenAliveCells);
 }
 
 main();
