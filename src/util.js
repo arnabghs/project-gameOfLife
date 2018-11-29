@@ -41,6 +41,7 @@ const getNeighboursMiddleColumn = function(side,position){
 
 const convertCoordinateToValue = function(inputArray,bounds){
   let side = bounds.bottomRight[1]-bounds.topLeft[1]+1;
+  inputArray = inputArray.map(x => x.filter(y => y<side));
   let inputArrayOfValue = inputArray.map(x => x[0]*side+x[1]+1);
   return {side: side, livePositionValue: inputArrayOfValue}
 }
