@@ -30,56 +30,56 @@ describe ("Test for util",function(){
   });
   describe("test for createObject",function(){
     it('should return empty object for input 0',function(){
-      assert(createObject(0),{});
+      assert(createObject(0,0),{});
     });
     it('for non-zero input should return an object of length equal to input\'s square',function(){
-      assert(createObject(2),{1:' ',2:' ',3:' ',4:' '});
+      assert(createObject(2,2),{1:' ',2:' ',3:' ',4:' '});
     });
   });
   describe("test for filterNeighbours",function(){
     it('for empty array should return empty array',function(){
-      assert(filterNeighbours(2,[]),[]);
+      assert(filterNeighbours(2,2,[]),[]);
     });
     it('for one or multielements array should return array of same or less length',function(){
-      assert(filterNeighbours(3,[2,-1,5,6,0]),[2,5,6]);
+      assert(filterNeighbours(3,3,[2,-1,5,6,0]),[2,5,6]);
     });
   });
   describe("test for getNeighboursFirstColumn",function(){
     it('for side 0 should return empty array',function(){
-      assert(getNeighboursFirstColumn(0,1),[]);
+      assert(getNeighboursFirstColumn(0,0,1),[]);
     });
     it('for different size an position array length will depend on the position',function(){
-      assert(getNeighboursFirstColumn(4,1),[2,5,6]);
-      assert(getNeighboursFirstColumn(4,9),[5,6,10,13,14]);
+      assert(getNeighboursFirstColumn(4,4,1),[2,5,6]);
+      assert(getNeighboursFirstColumn(4,4,9),[5,6,10,13,14]);
     }); 
   });
   describe("test for getNeighboursLastColumn",function(){
     it('for side 0 should return empty array',function(){
-      assert(getNeighboursLastColumn(0,1),[]);
+      assert(getNeighboursLastColumn(0,0,1),[]);
     });
     it('for different size an position array length will depend on the position',function(){
-      assert(getNeighboursLastColumn(4,4),[3,7,8]);
-      assert(getNeighboursLastColumn(4,12),[7,8,11,15,16]);
+      assert(getNeighboursLastColumn(4,4,4),[3,7,8]);
+      assert(getNeighboursLastColumn(4,4,12),[7,8,11,15,16]);
     }); 
   });
   describe("test for getNeighboursMiddleColumn",function(){
     it('for side 0 should return empty array',function(){
-      assert(getNeighboursMiddleColumn(0,1),[]);
+      assert(getNeighboursMiddleColumn(0,0,1),[]);
     });
     it('for different sizes array length will depend on the position',function(){
-      assert(getNeighboursMiddleColumn(4,6),[1,2,3,5,7,9,10,11]);
-      assert(getNeighboursMiddleColumn(4,11),[6,7,8,10,12,14,15,16]);
+      assert(getNeighboursMiddleColumn(4,4,6),[1,2,3,5,7,9,10,11]);
+      assert(getNeighboursMiddleColumn(4,4,11),[6,7,8,10,12,14,15,16]);
     }); 
   });
   describe('test for convertCoordinateToValue',function(){
     it('for empty input array should return empty array',function(){
-      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[3,3]}),{side:4,livePositionValue:[]});
+      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[3,3]}),{length:4,width:4,livePositionValue:[]});
     });
     it('for bounds 0,0 should return side length 1',function(){
-      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[0,0]}),{side:1,livePositionValue:[]});
+      assert(convertCoordinateToValue([],{topLeft:[0,0],bottomRight:[0,0]}),{length:1,width:1,livePositionValue:[]});
     });
     it('for non-empty array should preserve the length of array',function(){
-      assert(convertCoordinateToValue([[0,1],[1,1]],{topLeft:[0,0],bottomRight:[2,2]}),{side:3,livePositionValue:[2,5]});
+      assert(convertCoordinateToValue([[0,1],[1,1]],{topLeft:[0,0],bottomRight:[2,2]}),{length:3,width:3,livePositionValue:[2,5]});
     });
   });
 });

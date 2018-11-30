@@ -4,7 +4,8 @@ const {
   makeHorizontalBorder,
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
-  getNeighboursMiddleColumn } = require('./util.js');
+  getNeighboursMiddleColumn,
+  convertValueToCoordinate} = require('./util.js');
 
 
 const produceAlive = function(object,array){
@@ -34,35 +35,67 @@ const outlineGenerator = function(side,object){
   return outline;
 }
 
-const getAllNeighbours = function(side,position){
-  if((position-1)%side == 0) return getNeighboursFirstColumn(side,position);
-  if(position % side == 0) return getNeighboursLastColumn(side,position);
-  return getNeighboursMiddleColumn(side,position);
+
+const getAllNeighbours = function(length,width,position){
+  if((position-1)%length == 0) return getNeighboursFirstColumn(length,width,position);
+  if(position % length == 0) return getNeighboursLastColumn(length,width,position);
+  return getNeighboursMiddleColumn(length,width,position);
 }
 
-
-const getLiveNeighboursLength = function(aliveArray,lengthOfSide,position){
-  let allNeighbourArray = getAllNeighbours(lengthOfSide,position);
+const getLiveNeighboursLength = function(aliveArray,length,width,position){
+  let allNeighbourArray = getAllNeighbours(length,width,position);
   return allNeighbourArray.filter(x => aliveArray.includes(x)).length;
 }
 
-const produceNextGenAliveCells = function(side,object,aliveArray){
+
+const produceNextGenAliveCells = function(length,width,object,aliveArray){
   let deadCells = Object.keys(object).map(x => +x).filter(x => !aliveArray.includes(x));
-  const aliveNeighbourLength = getLiveNeighboursLength.bind(null,aliveArray,side);
+  const aliveNeighbourLength = getLiveNeighboursLength.bind(null,aliveArray,length,width);
   let aliveCells = aliveArray.filter(x => aliveNeighbourLength(x)==2 || aliveNeighbourLength(x)==3);
   return aliveCells.concat(deadCells.filter(x => aliveNeighbourLength(x) == 3));
 }
 
-const logSampleSpace = function(side,aliveArray){
-  let emptyObject = createObject(side);
+const logSampleSpace = function(length,width,aliveArray){
+  let emptyObject = createObject(length,width);
   let presentObject = produceAlive(emptyObject,aliveArray);
-  console.log(outlineGenerator(side,presentObject));
+  console.log(outlineGenerator(length,presentObject));
 }
+
+const filterCellsWithinBound = function(bounds){
+  let length = bounds.bottomRight[1]+1;
+  let width = bounds.bottomRight[0]+1;
+  let sampleArray = [];
+  for (let i= 1; i<= length*width; i++){
+    let value = convertValueToCoordinate([i],length);
+    if(value[0][0] >= bounds.topLeft[0] && value[0][1] >= bounds.topLeft[1]){
+      sampleArray.push(value[0]);
+    }
+  }
+  return sampleArray;
+}
+
+const selectAliveWithinBound = function(currGeneration,bounds){
+  let filteredSampleSpace = filterCellsWithinBound(bounds);
+  return currGeneration.filter(x => filteredSampleSpace.some(y => y.toString() === x.toString()));
+}
+
+const getModifiedCurrGen = function (currGeneration,bounds){
+  let diff = bounds.topLeft[0] - 0;
+  return currGeneration.map(x => x.map(y => y-diff));
+}
+
+const getModifiedNextGen = function (currGeneration,bounds){
+  let diff = bounds.topLeft[0] - 0;
+  return currGeneration.map(x => x.map(y => y+diff));
+}
+
 
 module.exports = { 
   produceAlive,
-  outlineGenerator,
   getAllNeighbours,
   getLiveNeighboursLength,
   produceNextGenAliveCells,
-  logSampleSpace }
+  logSampleSpace,
+  selectAliveWithinBound,
+  getModifiedCurrGen,
+  getModifiedNextGen }

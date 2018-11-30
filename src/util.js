@@ -1,4 +1,3 @@
-const readline = require('readline-sync').question;
 
 const repeatCharacter = function(symbol,width,delimeter){
   return new Array(width).fill(symbol).join(delimeter);
@@ -8,43 +7,49 @@ const makeHorizontalBorder = function(width){
   return "+"+repeatCharacter("---+",width,"");
 }
 
-const createObject = function(side){
+const createObject = function(length,width){
   let sampleObject = {};
-  for(index=1; index <= Math.pow(side,2); index++){
+  for(index=1; index <= length*width; index++){
     sampleObject[index] = ' ';
   }
   return sampleObject;
 }
 
-const filterNeighbours = function(side,inputArray){
-  totalArray =  Object.keys(createObject(side)).map(x => +x)
+const filterNeighbours = function(length,width,inputArray){
+  totalArray =  Object.keys(createObject(length,width)).map(x => +x)
   return inputArray.filter(x => totalArray.includes(x));
 }
 
-const getNeighboursFirstColumn = function(side,position){
-  let p = position, s = side;
-  let neighbours = new Array(0).concat(p-s,p-s+1,p+1,p+s,p+s+1);
-  return filterNeighbours(side,neighbours);
+const getNeighboursFirstColumn = function(length,width,position){
+  let p = position, l = length;
+  let neighbours = new Array(0).concat(p-l,p-l+1,p+1,p+l,p+l+1);
+  return filterNeighbours(length,width,neighbours);
 }
 
-const getNeighboursLastColumn = function(side,position){
-  let p = position, s = side;
-  let neighbours = new Array(0).concat(p-s-1,p-s,p-1,p+s-1,p+s);
-  return filterNeighbours(side,neighbours);
+const getNeighboursLastColumn = function(length,width,position){
+  let p = position, l = length;
+  let neighbours = new Array(0).concat(p-l-1,p-l,p-1,p+l-1,p+l);
+  return filterNeighbours(length,width,neighbours);
 }
 
-const getNeighboursMiddleColumn = function(side,position){
-  let p = position, s = side;
-  let neighbours = new Array(0).concat(p-s-1,p-s,p-s+1,p-1,p+1,p+s-1,p+s,p+s+1);
-  return filterNeighbours(side,neighbours);
+const getNeighboursMiddleColumn = function(length,width,position){
+  let p = position, l = length;
+  let neighbours = new Array(0).concat(p-l-1,p-l,p-l+1,p-1,p+1,p+l-1,p+l,p+l+1);
+  return filterNeighbours(length,width,neighbours);
 }
 
 const convertCoordinateToValue = function(inputArray,bounds){
-  let side = bounds.bottomRight[1]-bounds.topLeft[1]+1;
-  inputArray = inputArray.map(x => x.filter(y => y<side));
-  let inputArrayOfValue = inputArray.map(x => x[0]*side+x[1]+1);
-  return {side: side, livePositionValue: inputArrayOfValue}
+  let length = bounds.bottomRight[1]-bounds.topLeft[1]+1;
+  let width = bounds.bottomRight[0]-bounds.topLeft[0]+1;
+  inputArray = inputArray.map(x => x.filter(y => y<length));
+  let inputArrayOfValue = inputArray.map(x => x[0]*length+x[1]+1);
+  return {length: length, width: width, livePositionValue: inputArrayOfValue}
 }
+
+const convertValueToCoordinate = function(input,length){
+  return input.map(x => [Math.floor((x-1)/length),(x-1)%length]);
+}
+
 
 module.exports = {
   repeatCharacter,
@@ -54,4 +59,5 @@ module.exports = {
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
   getNeighboursMiddleColumn,
-  convertCoordinateToValue }
+  convertCoordinateToValue,
+  convertValueToCoordinate}
