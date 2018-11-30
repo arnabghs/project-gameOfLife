@@ -15,12 +15,12 @@ const produceAlive = function(object,array){
   return object;
 }
 
-const outlineGenerator = function(side,object){
-  let outline = makeHorizontalBorder(side)+"\n";
+const outlineGenerator = function(length,width,object){
+  let outline = makeHorizontalBorder(length)+"\n";
   let height = 0;
   let startingIndex = 1;
-  let lastIndex = side;
-  while (height < side){
+  let lastIndex = length;
+  while (height < width){
     let line = '';
     for(let index=startingIndex; index<=lastIndex; index++){
       line += '| ' + object[index] + ' ';
@@ -28,10 +28,10 @@ const outlineGenerator = function(side,object){
     line = line + '|' + '\n';
     outline += line;
     height++;
-    startingIndex += side;
-    lastIndex += side;
+    startingIndex += length;
+    lastIndex += length;
   }
-  outline += makeHorizontalBorder(side);
+  outline += makeHorizontalBorder(length);
   return outline;
 }
 
@@ -58,7 +58,7 @@ const produceNextGenAliveCells = function(length,width,object,aliveArray){
 const logSampleSpace = function(length,width,aliveArray){
   let emptyObject = createObject(length,width);
   let presentObject = produceAlive(emptyObject,aliveArray);
-  console.log(outlineGenerator(length,presentObject));
+  console.log(outlineGenerator(length,width,presentObject));
 }
 
 const filterCellsWithinBound = function(bounds){
