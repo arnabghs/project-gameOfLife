@@ -5,7 +5,8 @@ const {
   getNeighboursFirstColumn,
   getNeighboursLastColumn,
   getNeighboursMiddleColumn,
-  convertValueToCoordinate} = require('./util.js');
+  convertValueToCoordinate,
+  convertCoordinateToValue } = require('./util.js');
 
 
 const produceAlive = function(object,array){
@@ -89,6 +90,14 @@ const getModifiedNextGen = function (currGeneration,bounds){
   return currGeneration.map(x => x.map(y => y+diff));
 }
 
+const nextGeneration = function(currGeneration,bounds) {
+  let liveCellsInBound = selectAliveWithinBound(currGeneration,bounds);
+  let modifiedCurrGen =  getModifiedCurrGen(liveCellsInBound,bounds);
+  let {length,width,livePositionValue } = convertCoordinateToValue(modifiedCurrGen,bounds);
+  let inputValueArray = produceNextGenAliveCells(length,width,createObject(length,width),livePositionValue);
+  let nextGenCoordinates = convertValueToCoordinate(inputValueArray,length);
+  return getModifiedNextGen(nextGenCoordinates,bounds);
+}
 
 module.exports = { 
   produceAlive,
@@ -98,4 +107,5 @@ module.exports = {
   logSampleSpace,
   selectAliveWithinBound,
   getModifiedCurrGen,
-  getModifiedNextGen }
+  getModifiedNextGen,
+  nextGeneration }

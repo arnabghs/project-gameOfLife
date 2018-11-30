@@ -1,10 +1,8 @@
-const { produceNextGenAliveCells,
+const { 
   logSampleSpace,
-  selectAliveWithinBound,
-  getModifiedCurrGen,
-  getModifiedNextGen } = require('./src/lib.js');
+  nextGeneration } = require('./src/lib.js');
 
-const { createObject,
+const { 
   convertCoordinateToValue,
   convertValueToCoordinate } = require('./src/util.js');
 
@@ -14,15 +12,6 @@ let boundsCoordinate = process.argv[3].split('_').map(x=> x.split(',')).map(x =>
 let bounds = {};
 bounds['topLeft'] = boundsCoordinate[0];
 bounds['bottomRight'] = boundsCoordinate[1];
-
-const nextGeneration = function(currGeneration,bounds) {
-  let liveCellsInBound = selectAliveWithinBound(currGeneration,bounds);
-  let modifiedCurrGen =  getModifiedCurrGen(liveCellsInBound,bounds);
-  let {length,width,livePositionValue } = convertCoordinateToValue(modifiedCurrGen,bounds);
-  let inputValueArray = produceNextGenAliveCells(length,width,createObject(length,width),livePositionValue);
-  let nextGenCoordinates = convertValueToCoordinate(inputValueArray,length);
-  return getModifiedNextGen(nextGenCoordinates,bounds);
-}
 
 const main = function(){
   let {length,width,livePositionValue } = convertCoordinateToValue(aliveArray,bounds)
