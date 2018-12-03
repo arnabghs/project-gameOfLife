@@ -22,11 +22,11 @@ const outlineGenerator = function(length,width,object){
   let startingIndex = 1;
   let lastIndex = length;
   while (height < width){
-    let line = '';
+    let line = '|';
     for(let index=startingIndex; index<=lastIndex; index++){
-      line += '| ' + object[index] + ' ';
+      line += ' ' + object[index];
     };
-    line = line + '|' + '\n';
+    line = line + ' |' + '\n';
     outline += line;
     height++;
     startingIndex += length;

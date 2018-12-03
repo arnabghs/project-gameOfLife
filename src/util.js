@@ -4,7 +4,7 @@ const repeatCharacter = function(symbol,width,delimeter){
 }
 
 const makeHorizontalBorder = function(width){
-  return "+"+repeatCharacter("---+",width,"");
+  return "+-"+repeatCharacter("--",width,"")+"+";
 }
 
 const createObject = function(length,width){
